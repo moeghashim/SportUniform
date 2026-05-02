@@ -2,7 +2,7 @@ export type Sport = {
   name: string;
   slug: string;
   color: string;
-  imageHint: string;
+  image: string;
 };
 
 export type UniformProduct = {
@@ -23,22 +23,47 @@ export type UniformProduct = {
 };
 
 export const sports: Sport[] = [
-  { name: "Baseball", slug: "baseball", color: "#1f68d7", imageHint: "BAT" },
+  {
+    name: "Baseball",
+    slug: "baseball",
+    color: "#1f68d7",
+    image: "/sportuniform/baseball.png",
+  },
   {
     name: "Basketball",
     slug: "basketball",
     color: "#f97316",
-    imageHint: "HOOP",
+    image: "/sportuniform/basketball.png",
   },
-  { name: "Football", slug: "football", color: "#0f2d5a", imageHint: "GRID" },
-  { name: "Hockey", slug: "hockey", color: "#008fb3", imageHint: "ICE" },
-  { name: "Soccer", slug: "soccer", color: "#16a34a", imageHint: "GOAL" },
-  { name: "Softball", slug: "softball", color: "#ef4444", imageHint: "BALL" },
+  {
+    name: "Football",
+    slug: "football",
+    color: "#0f2d5a",
+    image: "/sportuniform/football.png",
+  },
+  {
+    name: "Hockey",
+    slug: "hockey",
+    color: "#008fb3",
+    image: "/sportuniform/hockey.png",
+  },
+  {
+    name: "Soccer",
+    slug: "soccer",
+    color: "#16a34a",
+    image: "/sportuniform/soccer.png",
+  },
+  {
+    name: "Softball",
+    slug: "softball",
+    color: "#ef4444",
+    image: "/sportuniform/softball.png",
+  },
   {
     name: "Volleyball",
     slug: "volleyball",
     color: "#7c3aed",
-    imageHint: "NET",
+    image: "/sportuniform/volleyball.png",
   },
 ];
 

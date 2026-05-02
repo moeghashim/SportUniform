@@ -50,17 +50,18 @@ export default function HomePage() {
   return (
     <>
       <section className="relative overflow-hidden border-b border-slate-100 bg-white">
-        <div className="absolute inset-y-0 right-0 hidden w-1/2 opacity-35 lg:block">
+        <div className="absolute inset-0 hidden lg:block">
           <Image
-            src="/sportuniform/homepage-design.png"
+            src="/sportuniform/main-image.png"
             alt=""
             fill
-            sizes="50vw"
-            className="object-cover object-right"
+            sizes="100vw"
+            className="object-cover object-center"
             priority
           />
-          <div className="absolute inset-0 bg-gradient-to-r from-white via-white/75 to-white/20" />
+          <div className="absolute inset-0 bg-gradient-to-r from-white via-white/92 via-42% to-white/10" />
         </div>
+        <div className="absolute inset-0 bg-gradient-to-b from-white/0 to-white/35 lg:hidden" />
         <div className="mx-auto grid min-h-[560px] max-w-7xl items-center gap-10 px-4 py-12 lg:grid-cols-[0.9fr_1.1fr]">
           <div className="relative z-10">
             <p className="mb-5 text-xs font-black uppercase tracking-wide text-[#0d63ff]">
@@ -117,17 +118,21 @@ export default function HomePage() {
             <Link
               key={sport.slug}
               href={`/search/${sport.slug}`}
-              className="group overflow-hidden rounded-lg border border-slate-200 bg-white p-3 text-center shadow-sm transition hover:-translate-y-0.5 hover:shadow-lg"
+              className="group overflow-hidden rounded-lg border border-slate-200 bg-white shadow-sm transition hover:-translate-y-0.5 hover:shadow-lg"
             >
-              <div
-                className="mb-3 flex aspect-[1.35] items-center justify-center rounded-md text-lg font-black text-white"
-                style={{
-                  background: `linear-gradient(135deg, ${sport.color}, #061d38)`,
-                }}
-              >
-                {sport.imageHint}
+              <div className="relative aspect-[1122/1402] bg-slate-50">
+                <Image
+                  src={sport.image}
+                  alt={`${sport.name} uniforms`}
+                  fill
+                  sizes="(min-width: 1024px) 14vw, (min-width: 768px) 25vw, 50vw"
+                  className="object-cover transition duration-300 group-hover:scale-[1.03]"
+                />
               </div>
-              <div className="text-xs font-black uppercase tracking-wide text-slate-950 group-hover:text-[#0d63ff]">
+              <div
+                className="px-3 py-3 text-center text-xs font-black uppercase tracking-wide group-hover:text-[#0d63ff]"
+                style={{ color: sport.color }}
+              >
                 {sport.name}
               </div>
             </Link>
