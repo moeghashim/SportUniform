@@ -1,76 +1,78 @@
+import Image from "next/image";
 import Link from "next/link";
+import { EnvelopeIcon, PhoneIcon } from "@heroicons/react/24/outline";
 
-import FooterMenu from "components/layout/footer-menu";
-import LogoSquare from "components/logo-square";
-import { getMenu } from "lib/shopify";
-import { Suspense } from "react";
+const columns = [
+  {
+    title: "Artwork Resources",
+    links: [
+      "Design Templates",
+      "Logo Guidelines",
+      "Font Styles",
+      "Color Charts",
+    ],
+  },
+  {
+    title: "Help & More",
+    links: ["How It Works", "Size Charts", "FAQs", "Returns & Exchanges"],
+  },
+  {
+    title: "Company",
+    links: ["About Us", "Contact Us", "Blog", "Careers"],
+  },
+];
 
-const { COMPANY_NAME, SITE_NAME } = process.env;
-
-export default async function Footer() {
-  const currentYear = new Date().getFullYear();
-  const copyrightDate = 2023 + (currentYear > 2023 ? `-${currentYear}` : "");
-  const skeleton =
-    "w-full h-6 animate-pulse rounded-sm bg-neutral-200 dark:bg-neutral-700";
-  const menu = await getMenu("next-js-frontend-footer-menu");
-  const copyrightName = COMPANY_NAME || SITE_NAME || "";
-
+export default function Footer() {
   return (
-    <footer className="text-sm text-neutral-500 dark:text-neutral-400">
-      <div className="mx-auto flex w-full max-w-7xl flex-col gap-6 border-t border-neutral-200 px-6 py-12 text-sm md:flex-row md:gap-12 md:px-4 min-[1320px]:px-0 dark:border-neutral-700">
+    <footer className="bg-[#061d38] text-white">
+      <div className="mx-auto grid max-w-7xl gap-10 px-4 py-10 md:grid-cols-[1.4fr_1fr_1fr_1fr_1.3fr]">
         <div>
-          <Link
-            className="flex items-center gap-2 text-black md:pt-1 dark:text-white"
-            href="/"
-          >
-            <LogoSquare size="sm" />
-            <span className="uppercase">{SITE_NAME}</span>
+          <Link href="/" className="relative mb-4 block h-12 w-48">
+            <Image
+              src="/sportuniform/logo.svg"
+              alt="SportUniform"
+              fill
+              sizes="192px"
+              className="object-contain object-left"
+            />
           </Link>
+          <p className="max-w-xs text-sm leading-6 text-blue-100">
+            Custom team uniforms for every sport. Built for performance.
+            Designed for your team.
+          </p>
+          <p className="mt-6 text-xs text-blue-200">© 2026 SportUniform.com</p>
         </div>
-        <Suspense
-          fallback={
-            <div className="flex h-[188px] w-[200px] flex-col gap-2">
-              <div className={skeleton} />
-              <div className={skeleton} />
-              <div className={skeleton} />
-              <div className={skeleton} />
-              <div className={skeleton} />
-              <div className={skeleton} />
-            </div>
-          }
-        >
-          <FooterMenu menu={menu} />
-        </Suspense>
-        <div className="md:ml-auto">
-          <a
-            className="flex h-8 w-max flex-none items-center justify-center rounded-md border border-neutral-200 bg-white text-xs text-black dark:border-neutral-700 dark:bg-black dark:text-white"
-            aria-label="Deploy on Vercel"
-            href="https://vercel.com/templates/next.js/nextjs-commerce"
-          >
-            <span className="px-3">▲</span>
-            <hr className="h-full border-r border-neutral-200 dark:border-neutral-700" />
-            <span className="px-3">Deploy</span>
-          </a>
-        </div>
-      </div>
-      <div className="border-t border-neutral-200 py-6 text-sm dark:border-neutral-700">
-        <div className="mx-auto flex w-full max-w-7xl flex-col items-center gap-1 px-4 md:flex-row md:gap-0 md:px-4 min-[1320px]:px-0">
-          <p>
-            &copy; {copyrightDate} {copyrightName}
-            {copyrightName.length && !copyrightName.endsWith(".")
-              ? "."
-              : ""}{" "}
-            All rights reserved.
-          </p>
-          <hr className="mx-4 hidden h-4 w-[1px] border-l border-neutral-400 md:inline-block" />
-          <p>
-            <a href="https://github.com/vercel/commerce">View the source</a>
-          </p>
-          <p className="md:ml-auto">
-            <a href="https://vercel.com" className="text-black dark:text-white">
-              Created by ▲ Vercel
-            </a>
-          </p>
+        {columns.map((column) => (
+          <div key={column.title}>
+            <h3 className="mb-3 text-xs font-black uppercase tracking-wide">
+              {column.title}
+            </h3>
+            <ul className="space-y-2 text-sm text-blue-100">
+              {column.links.map((link) => (
+                <li key={link}>
+                  <Link href="#" className="transition hover:text-white">
+                    {link}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))}
+        <div>
+          <h3 className="mb-3 text-xs font-black uppercase tracking-wide">
+            Customer Service
+          </h3>
+          <div className="space-y-3 text-sm text-blue-100">
+            <p className="flex items-center gap-2">
+              <PhoneIcon className="h-4 w-4" />
+              866-789-9911
+            </p>
+            <p className="flex items-center gap-2">
+              <EnvelopeIcon className="h-4 w-4" />
+              sales@sportuniform.com
+            </p>
+            <p>Mon - Fri: 8am - 6pm EST</p>
+          </div>
         </div>
       </div>
     </footer>

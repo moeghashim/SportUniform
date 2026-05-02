@@ -1,61 +1,117 @@
 import CartModal from "components/cart/modal";
-import LogoSquare from "components/logo-square";
-import { getMenu } from "lib/shopify";
-import { Menu } from "lib/shopify/types";
+import { sports } from "lib/sportuniform-data";
+import Image from "next/image";
 import Link from "next/link";
-import { Suspense } from "react";
-import MobileMenu from "./mobile-menu";
-import Search, { SearchSkeleton } from "./search";
+import {
+  Bars3Icon,
+  HeartIcon,
+  MagnifyingGlassIcon,
+  PhoneIcon,
+  UserIcon,
+} from "@heroicons/react/24/outline";
 
-const { SITE_NAME } = process.env;
-
-export async function Navbar() {
-  const menu = await getMenu("next-js-frontend-header-menu");
-
+export function Navbar() {
   return (
-    <nav className="relative flex items-center justify-between p-4 lg:px-6">
-      <div className="block flex-none md:hidden">
-        <Suspense fallback={null}>
-          <MobileMenu menu={menu} />
-        </Suspense>
+    <header className="sticky top-0 z-40 border-b border-slate-200 bg-white shadow-sm">
+      <div className="bg-[#051f3d] text-xs font-bold text-white">
+        <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 py-2">
+          <div className="hidden items-center gap-5 md:flex">
+            <span className="inline-flex items-center gap-1.5">
+              <PhoneIcon className="h-3.5 w-3.5" />
+              1-844-991-1845
+            </span>
+            <Link href="/help">Help Center</Link>
+            <Link href="/upload-logo">Upload Logo</Link>
+          </div>
+          <div className="mx-auto uppercase tracking-wide md:mx-0">
+            Free Shipping on Orders Over $99
+          </div>
+          <div className="hidden items-center gap-4 md:flex">
+            <Link href="/account">Sign In / Sign Up</Link>
+            <HeartIcon className="h-5 w-5" />
+          </div>
+        </div>
       </div>
-      <div className="flex w-full items-center">
-        <div className="flex w-full md:w-1/3">
-          <Link
-            href="/"
-            prefetch={true}
-            className="mr-2 flex w-full items-center justify-center md:w-auto lg:mr-6"
+
+      <div className="mx-auto grid max-w-7xl grid-cols-[auto_1fr_auto] items-center gap-4 px-4 py-4">
+        <button
+          aria-label="Open navigation"
+          className="flex h-10 w-10 items-center justify-center rounded border border-slate-200 text-slate-950 lg:hidden"
+        >
+          <Bars3Icon className="h-5 w-5" />
+        </button>
+        <Link href="/" className="relative h-11 w-40 md:w-48">
+          <Image
+            src="/sportuniform/logo.svg"
+            alt="SportUniform"
+            fill
+            sizes="192px"
+            className="object-contain object-left"
+            priority
+          />
+        </Link>
+        <form action="/search" className="relative hidden lg:block">
+          <input
+            name="q"
+            className="h-12 w-full rounded-full border border-slate-200 bg-white px-6 pr-12 text-sm text-slate-950 shadow-sm outline-none transition placeholder:text-slate-400 focus:border-[#0d63ff] focus:ring-2 focus:ring-[#0d63ff]/20"
+            placeholder="Search for products, brands or categories"
+          />
+          <button
+            aria-label="Search"
+            className="absolute right-3 top-1/2 flex h-9 w-9 -translate-y-1/2 items-center justify-center rounded-full text-slate-500"
           >
-            <LogoSquare />
-            <div className="ml-2 flex-none text-sm font-medium uppercase md:hidden lg:block">
-              {SITE_NAME}
-            </div>
+            <MagnifyingGlassIcon className="h-5 w-5" />
+          </button>
+        </form>
+        <div className="flex items-center justify-end gap-2">
+          <Link
+            href="/search/baseball"
+            className="hidden min-h-10 items-center justify-center rounded bg-[#08264c] px-5 text-xs font-black uppercase tracking-wide text-white shadow-sm md:flex"
+          >
+            Team Uniforms
           </Link>
-          {menu.length ? (
-            <ul className="hidden gap-6 text-sm md:flex md:items-center">
-              {menu.map((item: Menu) => (
-                <li key={item.title}>
-                  <Link
-                    href={item.path}
-                    prefetch={true}
-                    className="text-neutral-500 underline-offset-4 hover:text-black hover:underline dark:text-neutral-400 dark:hover:text-neutral-300"
-                  >
-                    {item.title}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          ) : null}
-        </div>
-        <div className="hidden justify-center md:flex md:w-1/3">
-          <Suspense fallback={<SearchSkeleton />}>
-            <Search />
-          </Suspense>
-        </div>
-        <div className="flex justify-end md:w-1/3">
+          <Link
+            href="/quote"
+            className="hidden min-h-10 items-center justify-center rounded border border-red-500 px-5 text-xs font-black uppercase tracking-wide text-red-600 md:flex"
+          >
+            Quick Order
+          </Link>
+          <Link
+            aria-label="Account"
+            href="/account"
+            className="flex h-10 w-10 items-center justify-center rounded-full text-slate-950"
+          >
+            <UserIcon className="h-5 w-5" />
+          </Link>
           <CartModal />
         </div>
       </div>
-    </nav>
+
+      <nav className="hidden border-t border-slate-100 lg:block">
+        <div className="mx-auto flex max-w-7xl items-center justify-between px-4">
+          {sports.map((sport) => (
+            <Link
+              key={sport.slug}
+              href={`/search/${sport.slug}`}
+              className="px-3 py-3 text-xs font-black uppercase tracking-wide text-slate-950 underline-offset-8 transition hover:text-[#0d63ff] hover:underline"
+            >
+              {sport.name}
+            </Link>
+          ))}
+          <Link
+            href="/search/accessories"
+            className="px-3 py-3 text-xs font-black uppercase tracking-wide text-slate-950 underline-offset-8 transition hover:text-[#0d63ff] hover:underline"
+          >
+            Accessories
+          </Link>
+          <Link
+            href="/sale"
+            className="px-3 py-3 text-xs font-black uppercase tracking-wide text-red-600"
+          >
+            Sale
+          </Link>
+        </div>
+      </nav>
+    </header>
   );
 }
