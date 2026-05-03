@@ -1,6 +1,6 @@
 import Footer from "components/layout/footer";
 import { JerseyArt } from "components/sportuniform/jersey-art";
-import { OrderActions } from "components/sportuniform/order-actions";
+import { ProductOrderForm } from "components/sportuniform/product-order-form";
 import { ProductCard } from "components/sportuniform/product-card";
 import {
   getProductByHandle,
@@ -14,7 +14,6 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import type { ComponentType, SVGProps } from "react";
 import {
-  ArrowUpTrayIcon,
   CheckCircleIcon,
   ChevronLeftIcon,
   ChevronRightIcon,
@@ -129,9 +128,9 @@ export default async function ProductPage(props: {
           <span className="text-slate-950">{product.title}</span>
         </nav>
 
-        <div className="grid gap-8 lg:grid-cols-[1.05fr_0.95fr]">
-          <div className="grid gap-3 md:grid-cols-[86px_1fr]">
-            <div className="order-2 flex gap-2 overflow-x-auto md:order-1 md:flex-col">
+        <div className="grid min-w-0 grid-cols-[minmax(0,1fr)] gap-8 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)]">
+          <div className="grid min-w-0 grid-cols-[minmax(0,1fr)] gap-3 md:grid-cols-[86px_minmax(0,1fr)]">
+            <div className="order-2 flex max-w-[calc(100vw-2rem)] min-w-0 gap-2 overflow-x-auto md:order-1 md:max-w-none md:flex-col">
               {product.colors.map((color, index) => (
                 <button
                   key={color}
@@ -185,10 +184,10 @@ export default async function ProductPage(props: {
             </div>
           </div>
 
-          <div>
+          <div className="min-w-0">
             <div className="flex items-start justify-between gap-5">
               <div>
-                <h1 className="text-4xl font-black leading-none text-slate-950 md:text-5xl">
+                <h1 className="break-words text-4xl font-black leading-none text-slate-950 md:text-5xl">
                   {product.title}
                 </h1>
                 <p className="mt-3 text-sm text-slate-500">
@@ -251,67 +250,10 @@ export default async function ProductPage(props: {
               </div>
             </div>
 
-            <div className="mt-5">
-              <div className="text-sm font-black">
-                Color:{" "}
-                <span className="font-bold text-slate-600">Black/Gold</span>
-              </div>
-              <div className="mt-2 flex flex-wrap gap-3">
-                {product.colors.map((color, index) => (
-                  <button
-                    key={color}
-                    aria-label={`Color ${index + 1}`}
-                    className={`h-8 w-8 rounded-full border-2 ${index === 0 ? "border-[#0d63ff] ring-2 ring-[#0d63ff]/25" : "border-slate-300"}`}
-                    style={{ backgroundColor: color }}
-                  />
-                ))}
-              </div>
-            </div>
-
-            <div className="mt-5">
-              <div className="text-sm font-black">Size:</div>
-              <div className="mt-2 flex gap-2">
-                {product.sizes.map((size, index) => (
-                  <button
-                    key={size}
-                    className={`h-8 min-w-10 rounded border px-3 text-sm font-bold ${index === 0 ? "border-[#0d63ff] bg-blue-50 text-[#0d63ff]" : "border-slate-200 text-slate-700"}`}
-                  >
-                    {size}
-                  </button>
-                ))}
-              </div>
-            </div>
-
-            <label className="mt-5 block text-sm font-black">
-              Upload your image for customization
-              <span className="mt-2 flex min-h-16 items-center justify-center gap-3 rounded border border-dashed border-slate-300 bg-slate-50 px-4 text-center text-xs font-bold text-slate-500">
-                <ArrowUpTrayIcon className="h-6 w-6 text-[#0d63ff]" />
-                Drag & drop your file here, or browse PNG, JPG, PDF, AI, EPS
-              </span>
-            </label>
-
-            <label className="mt-4 block text-sm font-black">
-              Add a note for your order
-              <textarea
-                className="mt-2 min-h-16 w-full resize-none rounded border border-slate-200 px-3 py-2 text-sm font-normal outline-none focus:border-[#0d63ff]"
-                placeholder="e.g., Typography style, player names, logo placement, etc."
-              />
-            </label>
-
-            <div className="mt-5 flex items-center gap-4">
-              <span className="text-sm font-black">Quantity:</span>
-              <div className="flex h-10 items-center overflow-hidden rounded border border-slate-200">
-                <button className="h-full w-10 bg-slate-50 text-xl">-</button>
-                <span className="flex h-full w-12 items-center justify-center text-sm font-black">
-                  1
-                </span>
-                <button className="h-full w-10 bg-slate-50 text-xl">+</button>
-              </div>
-            </div>
-
-            <div className="mt-5">
-              <OrderActions product={toShopifyProduct(product)} />
-            </div>
+            <ProductOrderForm
+              product={product}
+              shopifyProduct={toShopifyProduct(product)}
+            />
 
             <div className="mt-5 grid grid-cols-2 gap-3 text-xs text-slate-600 md:grid-cols-4">
               {productServiceItems.map(({ icon: Icon, label, text }) => (
