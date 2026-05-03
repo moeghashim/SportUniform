@@ -61,19 +61,26 @@ export default function HomePage() {
           />
           <div className="absolute inset-0 bg-gradient-to-r from-white via-white/92 via-42% to-white/10" />
         </div>
-        <div className="absolute inset-0 bg-gradient-to-b from-white/0 to-white/35 lg:hidden" />
-        <div className="mx-auto grid min-h-[560px] max-w-7xl items-center gap-10 px-4 py-12 lg:grid-cols-[0.9fr_1.1fr]">
-          <div className="relative z-10">
+        <div className="mx-auto grid w-full max-w-7xl min-w-0 items-center gap-8 px-4 py-8 sm:py-10 lg:min-h-[560px] lg:grid-cols-[0.9fr_1.1fr] lg:gap-10 lg:py-12">
+          <div className="relative z-10 min-w-0">
             <p className="mb-5 text-xs font-black uppercase tracking-wide text-[#0d63ff]">
               /// Built for teams. Designed to win.
             </p>
-            <h1 className="max-w-xl text-5xl font-black leading-[0.98] tracking-normal text-slate-950 md:text-7xl">
-              Custom Sport Uniforms for{" "}
+            <h1 className="max-w-xl text-[2rem] font-black leading-[0.98] tracking-normal text-slate-950 sm:text-5xl md:text-7xl">
+              Custom Sport{" "}
+              <span className="block sm:inline">Uniforms for </span>
               <span className="text-[#0d63ff]">Every Team</span>
             </h1>
-            <p className="mt-6 max-w-lg text-base leading-7 text-slate-600">
-              Premium custom jerseys and team uniforms for baseball, basketball,
-              football, hockey, soccer, softball, and volleyball.
+            <p className="mt-6 max-w-lg text-sm leading-7 text-slate-600 sm:text-base">
+              <span className="block sm:inline">
+                Premium custom jerseys and team uniforms
+              </span>{" "}
+              <span className="block sm:inline">
+                for baseball, basketball, football,
+              </span>{" "}
+              <span className="block sm:inline">
+                hockey, soccer, softball, and volleyball.
+              </span>
             </p>
             <div className="mt-8 flex flex-col gap-3 sm:flex-row">
               <Link
@@ -105,13 +112,27 @@ export default function HomePage() {
               ))}
             </div>
           </div>
+          <div className="relative z-10 overflow-hidden rounded-lg border border-slate-100 bg-slate-50 shadow-sm lg:hidden">
+            <div className="relative aspect-[16/9]">
+              <Image
+                src="/sportuniform/main-image.png"
+                alt="Custom team uniforms across multiple sports"
+                fill
+                sizes="100vw"
+                className="object-cover object-[68%_center]"
+                priority
+              />
+              <div className="absolute inset-0 bg-gradient-to-r from-white/35 via-white/0 to-white/0" />
+            </div>
+          </div>
           <div className="relative z-10 hidden lg:block" />
         </div>
       </section>
 
       <section className="mx-auto max-w-7xl px-4 py-8">
-        <h2 className="mb-5 text-center text-xl font-black uppercase tracking-wide text-slate-950">
-          /// Shop Sports Uniforms by Sport ///
+        <h2 className="mb-5 text-center text-lg font-black uppercase tracking-wide text-slate-950 sm:text-xl">
+          <span className="block">/// Shop Sports Uniforms</span>
+          <span className="block sm:inline">by Sport ///</span>
         </h2>
         <div className="grid grid-cols-2 gap-3 md:grid-cols-4 lg:grid-cols-7">
           {sports.map((sport) => (

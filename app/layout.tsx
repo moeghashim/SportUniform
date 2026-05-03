@@ -27,7 +27,7 @@ export default async function RootLayout({
 }) {
   return (
     <html lang="en" className={GeistSans.variable}>
-      <body className="bg-white text-slate-950 selection:bg-blue-200">
+      <body className="overflow-x-hidden bg-white text-slate-950 selection:bg-blue-200">
         <CartProvider cartPromise={Promise.resolve(undefined)}>
           <Navbar />
           <main>

@@ -33,14 +33,14 @@ export function Navbar() {
         </div>
       </div>
 
-      <div className="mx-auto grid max-w-7xl grid-cols-[auto_1fr_auto] items-center gap-4 px-4 py-4">
+      <div className="mx-auto grid max-w-7xl grid-cols-[auto_1fr_auto] items-center gap-2 px-4 py-4 sm:gap-4">
         <button
           aria-label="Open navigation"
           className="flex h-10 w-10 items-center justify-center rounded border border-slate-200 text-slate-950 lg:hidden"
         >
           <Bars3Icon className="h-5 w-5" />
         </button>
-        <Link href="/" className="relative h-11 w-40 md:w-48">
+        <Link href="/" className="relative h-11 w-32 sm:w-40 md:w-48">
           <Image
             src="/sportuniform/logo.svg"
             alt="SportUniform"
@@ -79,7 +79,7 @@ export function Navbar() {
           <Link
             aria-label="Account"
             href="/account"
-            className="flex h-10 w-10 items-center justify-center rounded-full text-slate-950"
+            className="hidden h-10 w-10 items-center justify-center rounded-full text-slate-950 sm:flex"
           >
             <UserIcon className="h-5 w-5" />
           </Link>
